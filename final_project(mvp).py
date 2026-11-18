@@ -29,10 +29,10 @@ while True:
         led.off()
         seconds= 0
 
-        if audio_process is not None:
-            if audio_process.poll() is None:  # Check if the process is still running
-                audio_process.terminate()
-                audio_process.wait()
+        if audio_process is not None: #this is True either when a) audiio is still playing, b) audio stopped but audio_process is still not None
+            if audio_process.poll() is None:  # Checks for a)— .poll() returns None when audio is still playing
+                audio_process.terminate() # .terminate() stops audio
+                audio_process.wait() #program doesn't advance until .terminate() is fully executed
 
             audio_process = None  # Reset the audio process variable  
     
